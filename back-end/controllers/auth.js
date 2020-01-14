@@ -23,9 +23,9 @@ exports.signup = (req, res) => {
           error: err
         });
       }
-      //   res.json({
+      // res.json({
       //     user: success
-      //   });/* whenever we need to see created user object, we can use this code */
+      // });
       res.json({
         message: 'Signup success! Please signin.'
       });
@@ -71,5 +71,4 @@ exports.signout = (req, res) => {
 
 exports.requireSignin = expressJwt({
   secret: process.env.JWT_SECRET
-}); /*  normally we used to se up this process manullay like cheking
- jwt etc but now this expressJwt handle for us */
+});
