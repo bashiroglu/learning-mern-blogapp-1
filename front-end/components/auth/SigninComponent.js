@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { signin } from '../../actions/auth';
+import { signin, authenticate } from '../../actions/auth';
 import Router from 'next/router';
 
 const SigninComponent = () => {
   const [values, setValues] = useState({
     email: 'Abdulla@gmail.com',
     password: 'Abdulla',
-    error: '',
     loading: false,
     message: '',
     showForm: true
@@ -27,7 +26,9 @@ const SigninComponent = () => {
         // save user token to cookie
         // save user info to localstorage
         // authenticate user
-        Router.push(`/`);
+        authenticate(data, () => {
+          Router.push(`/`);
+        });
       }
     });
   };
@@ -67,7 +68,7 @@ const SigninComponent = () => {
         </div>
 
         <div>
-          <button className="btn btn-primary">Sign in</button>
+        <button className="btn btn-primary">Sign in</button>
         </div>
       </form>
     );
