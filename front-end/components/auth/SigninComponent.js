@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { signin, authenticate } from '../../actions/auth';
+import { useState, useEffect } from 'react';
+import { signin, authenticate, isAuth } from '../../actions/auth';
 import Router from 'next/router';
 
 const SigninComponent = () => {
@@ -10,6 +10,10 @@ const SigninComponent = () => {
     message: '',
     showForm: true
   });
+
+  useEffect(() => {
+    isAuth() && Router.push(`/`);
+  }, []);
 
   const { email, password, error, loading, message, showForm } = values;
 
@@ -68,7 +72,7 @@ const SigninComponent = () => {
         </div>
 
         <div>
-        <button className="btn btn-primary">Sign in</button>
+          <button className="btn btn-primary">Sign in</button>
         </div>
       </form>
     );
