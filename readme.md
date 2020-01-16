@@ -1,6 +1,6 @@
 # Notes for back-end side of project
 
-After download source code and set-up the app, please add your .env file to main directory which contains all env variables listed ( `NODE_ENV, PORT, CLIENT_URL, DATABASE_CLOUD, DATABASE_LOCAL,JWT_SECRET`).
+After download source code and set-up the app, please add your .env file to main directory which contains all env variables listed ( `NODE_ENV, PORT, CLIENT_URL, DATABASE_CLOUD, DATABASE_LOCAL, JWT_SECRET, APP_NAME`).
 
 Then run
 `npm start`
