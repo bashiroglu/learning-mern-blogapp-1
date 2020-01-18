@@ -26,6 +26,9 @@ const CreateBlog = ({ router }) => {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
 
+  const [checked, setChecked] = useState([]); // categories
+  const [checkedTag, setCheckedTag] = useState([]); // tags
+
   const [body, setBody] = useState(blogFromLS());
   const [values, setValues] = useState({
     error: '',
@@ -92,12 +95,48 @@ const CreateBlog = ({ router }) => {
     }
   };
 
+  const handleToggle = c => () => {
+    setValues({ ...values, error: '' });
+    // return the first index or -1
+    const clickedCategory = checked.indexOf(c);
+    const all = [...checked];
+
+    if (clickedCategory === -1) {
+      all.push(c);
+    } else {
+      all.splice(clickedCategory, 1);
+    }
+    console.log(all);
+    setChecked(all);
+    formData.set('categories', all);
+  };
+
+  const handleTagsToggle = t => () => {
+    setValues({ ...values, error: '' });
+    // return the first index or -1
+    const clickedTag = checked.indexOf(t);
+    const all = [...checkedTag];
+
+    if (clickedTag === -1) {
+      all.push(t);
+    } else {
+      all.splice(clickedTag, 1);
+    }
+    console.log(all);
+    setCheckedTag(all);
+    formData.set('tags', all);
+  };
+
   const showCategories = () => {
     return (
       categories &&
       categories.map((c, i) => (
         <li key={i} className="list-unstyled">
-          <input type="checkbox" className="mr-2" />
+          <input
+            onChange={handleToggle(c._id)}
+            type="checkbox"
+            className="mr-2"
+          />
           <label className="form-check-label">{c.name}</label>
         </li>
       ))
@@ -109,7 +148,11 @@ const CreateBlog = ({ router }) => {
       tags &&
       tags.map((t, i) => (
         <li key={i} className="list-unstyled">
-          <input type="checkbox" className="mr-2" />
+          <input
+            onChange={handleTagsToggle(t._id)}
+            type="checkbox"
+            className="mr-2"
+          />
           <label className="form-check-label">{t.name}</label>
         </li>
       ))
